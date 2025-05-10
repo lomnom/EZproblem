@@ -70,7 +70,7 @@ def factory(i):
 	else:
 		raise ValueError("Too many sample testcases generated")
 ```
-An example `creator.py` file is in `bracketex/creator.py`. It is commented to serve as a tutorial.
+An example `creator.py` file is provided in `bracketex/creator.py` if helpful. It is commented to serve as a tutorial.
 
 PROTIP: Use `help(class / function)` to get documentation on any classes/methods, all the code has lots of docstrings.
 
