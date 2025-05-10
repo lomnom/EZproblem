@@ -46,7 +46,7 @@ solver = "INSERT SOLVER FILENAME HERE"
 subtask_1 = problem.new_subtask(ez.cbr_naming(1, HOW MANY POINTS))
 
 # Define a function that generates testcases for subtask 1, and how many testcases to generate
-# This function creates a testcase and returns it as a string. It is called once per testcase generated.
+# The function will create a testcase and returns it as a string. It is called once per testcase generated.
 # @subtask_1.testcases(How many testcases to generate with this function, name for the testcases made with this)
 @subtask_1.testcases(HOW MANY, INSERT NAME) 
 def factory(i): 
