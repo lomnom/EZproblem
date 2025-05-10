@@ -29,7 +29,7 @@ from random import randint, choice
 problem = ez.Problem("INSERT PROBLEM NAME HERE")
 solver = "INSERT SOLVER FILENAME HERE"
 
-# problem.new_subtask(ez.cbr_naming(SUBTASK NUMBER, HOW MANY POINTS))
+# format: problem.new_subtask(ez.cbr_naming(SUBTASK NUMBER, HOW MANY POINTS))
 subtask_1 = problem.new_subtask(ez.cbr_naming(1, HOW MANY POINTS))
 
 # Define a function that generates testcases for subtask 1, and how many testcases to generate
@@ -45,6 +45,7 @@ def factory(i):
 	... # Logic to generate
 	return testcase_string
 
+# Add another subtask
 subtask_2 = problem.new_subtask(ez.cbr_naming(2, HOW MANY POINTS))
 
 @subtask_2.testcases(HOW MANY, INSERT NAME) 
