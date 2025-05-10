@@ -1,10 +1,9 @@
-from typing import Any
-
 """
 File imported by EZproblem project factory.py
 Contains the Problem class used to specify testcase info.
 This file only handles input creation. Outputs are handled by the main program.
 """
+from typing import Any
 
 LOGGING = True # Set to true to enable logging.
 def log(message: str) -> None:
