@@ -29,6 +29,7 @@ from random import randint, choice
 problem = ez.Problem("INSERT PROBLEM NAME HERE")
 solver = "INSERT SOLVER FILENAME HERE"
 
+# Add a subtask.
 # format: problem.new_subtask(ez.cbr_naming(SUBTASK NUMBER, HOW MANY POINTS))
 subtask_1 = problem.new_subtask(ez.cbr_naming(1, HOW MANY POINTS))
 
