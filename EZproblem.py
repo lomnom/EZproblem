@@ -35,8 +35,7 @@ def cbr_naming(subtask_no: int, points: int):
 
 class Subtask:
 	"""Class representing subtask in a CP problem.
-	Every subtask has general and specific testcase generating functions.
-	Every subtask has specific testcase numbers.
+	Every subtask has testcase generating functions.
 
 	Attributes:
 	- name: str - name of subtask

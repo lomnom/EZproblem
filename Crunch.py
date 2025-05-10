@@ -52,9 +52,28 @@ def get_creator(proj_root: str) -> "module":
 	spec.loader.exec_module(creator)
 	return creator
 
+def get_problem(creator: "module", proj_root: str) -> tuple:
+	"""Takes in the module returned by get_creator and gets the project and
+	solver objects from it. Returns (project, solver_path)."""
+	try:
+		problem = creator.problem
+	except AttributeError:
+		error(
+			"Error! There should be a variable named `problem` in the global scope of creator.py.\n"
+			"It is the ez.Problem object which defines your problem."
+		)
+
+	try:
+		solver_path = proj_root + creator.solver
+	except AttributeError:
+		error(
+			"Error! There should be a variable named `solver` in the global scope of creator.py.\n"
+			"It is the path to the solver binary for the problem."
+		)
+	return (problem, solver_path)
+
 def display_info(problem: ez.Problem):
-	print("[Problem info]")
-	print(f"Name: {problem.name}")
+	print(f"Problem name: {problem.name}")
 	print()
 	print(problem.breakdown_str())
 	print()
@@ -82,6 +101,10 @@ def run(exc_path: str, input_str: str) -> tuple:
 
 	return (proc.stdout.decode(errors="replace"), end - start)
 
+def time_str(seconds: float):
+	"""Formats a time in seconds to 2dp with s postfix"""
+	return f"{round(seconds, 2)}s"
+
 def generate_solution(solver_path: str, testcase: str) -> tuple:
 	"""Runs testcase through solver to get output and returns it.
 	Raises RuntimeError if solver crashes.
@@ -91,7 +114,7 @@ def generate_solution(solver_path: str, testcase: str) -> tuple:
 		output, duration = run(solver_path, testcase)
 	except RuntimeError:
 		raise RuntimeError("Solver crashed!")
-	print(f"Solved in {round(duration, 2)}s!")
+	print(f"Solved in {time_str(duration)}!")
 	return (output, duration)
 
 def save_result(out_folder: str, filename: str, data: str) -> str:
@@ -121,10 +144,32 @@ def generate_testcases(problem: ez.Problem, solver_path: str, out_folder: str, e
 		save_result(out_folder, f"{number}.out", output)
 	return times
 
-def display_times_breakdown(times: list, problem: ez.Problem):
+def display_times_breakdown(times: list, problem: ez.Problem) -> None:
 	"""Takes in a list of times taken to solve subtasks in order
-	Displays stats split by subtask and testcase type.
-	"""
+	Displays stats split by subtask and testcase type."""
+	print("Solver time breakdown:")
+
+	details = problem.testcase_details()
+	for subtask, breakdown in details:
+		print(f"For subtask {subtask.name}:")
+		total_n = 0
+		total_time = 0
+		total_max = 0
+		total_min = float("inf")
+		for case_type, _, idx in breakdown:
+			low_idx, high_idx = idx
+			these_times = times[low_idx - 1:high_idx]
+			avg = sum(these_times)/len(these_times)
+			print(
+				f"- {case_type}: avg={time_str(avg)} "
+				f"min={time_str(min(these_times))} max={time_str(max(these_times))}"
+			)
+
+			total_n += len(these_times)
+			total_time += sum(these_times)
+			total_max = max(total_max, max(these_times))
+			total_min = min(total_min, min(these_times))
+		print(f"> Overall: avg={time_str(total_time/total_n)} min={time_str(total_min)} max={time_str(total_max)}")
 
 def main() -> None:
 	"""Main program function"""
@@ -132,35 +177,33 @@ def main() -> None:
 
 	# Project file paths
 	proj_root = args.project + "/" # Project root directory.
-	out_folder = proj_root + "/testcases/"
+	out_folder = proj_root + "testcases/"
 
 	if not os.path.exists(proj_root):
 		error(f"Project folder {proj_root} does not exist!")
 
 	creator = get_creator(proj_root)
-	try:
-		problem = creator.problem
-	except AttributeError:
-		error(
-			"Error! There should be a variable named `problem` in the global scope of creator.py.\n"
-			"It is the ez.Problem object which defines your problem."
-		)
+	problem, solver_path = get_problem(creator, proj_root)
 
 	display_info(problem)
+
+	print()
 	try:
 		input("Press enter to generate testcases, ctrl-c to cancel > ")
 	except KeyboardInterrupt:
 		error("Cancelled.")
 
-	try:
-		solver_path = proj_root + creator.solver
-	except AttributeError:
-		error(
-			"Error! There should be a variable named `solver` in the global scope of creator.py.\n"
-			"It is the path to the solver binary for the problem."
-		)
-
 	times = generate_testcases(problem, solver_path, out_folder)
+
+	print()
+	display_times_breakdown(times, problem)
+
+	print()
+	print("(recap)")
+	display_info(problem)
+
+	print()
+	print("All testcases generated! They are in " + out_folder)
 
 if __name__ == "__main__":
 	main()
