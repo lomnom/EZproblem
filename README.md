@@ -1,4 +1,4 @@
-# EZproblem, a CP testcase generator
+# EZproblem, the *simplest* CP testcase generator
 Hate how tedious and finnicky it is to create CP testcases from scratch? Dont have enough RAM left in your brain for all that headache?
 
 EZproblem was made to solve this. It is a tool which handles everything in creating testcases for a CP question, leaving just the testcase generator for you to implement. 
