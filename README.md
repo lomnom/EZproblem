@@ -103,16 +103,16 @@ For subtask Subtask 5 (0 pts):
 Problem name: bracketex
 
 Testcase breakdown
-Subtask 1 (10 pts) (18 non-subset testcases):
+Subtask 1 (10 pts) (18 testcases):
 - Valid: subtask testcase #1-5, testcase files #1-5
 - Random: subtask testcase #6-15, testcase files #6-15
 - Trolling: subtask testcase #16-18, testcase files #16-18
 [OMITTED IN README.MD FOR BREVITY]
-Subtask 4 (40 pts) (23 non-subset testcases):
+Subtask 4 (40 pts) (23 testcases):
 - Valid: subtask testcase #1-5, testcase files #65-69
 - Random: subtask testcase #6-20, testcase files #70-84
 - Odd length: subtask testcase #21-23, testcase files #85-87
-Subtask 5 (0 pts) (3 non-subset testcases):
+Subtask 5 (0 pts) (3 testcases):
 - Sample testcases: subtask testcase #1-3, testcase files #88-90
 
 Testcase file numbers:

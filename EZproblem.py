@@ -211,8 +211,11 @@ class Problem:
 		details = self.testcase_details()
 		result = f"Testcase breakdown\n"
 		for subtask, allocations in details:
-			result += f"{subtask.name} ({subtask.get_testcase_count()} non-subset testcases):\n"
-			# TODO: Implement subset
+			result += f"{subtask.name} ({subtask.get_testcase_count()} testcases):\n"
+			# TODO: Implement subset!!!
+			if subtask.subsets != []:
+				raise NotImplementedError
+
 			for case_type, sub_idx, testcase_idx in allocations:
 				result += f"- {case_type}: subtask testcase #{sub_idx[0]}-{sub_idx[1]}"
 				result += f", testcase files #{testcase_idx[0]}-{testcase_idx[1]}\n"
