@@ -8,12 +8,12 @@ All you have to do is write a function which returns your testcase in string for
 EZproblem does:
 - Support having multiple testcase types for a subtask
 - Automatic allocation of testcase numbers, you just have to tell it how many of a type of testcase you want.
-- Automatically generates all .in and runs the solver to get .out files
+- Automatically generates all .in files and runs the solver to get .out files
 - Generation of solver time statistics by subtask and testcase type, so you can tell if your testcases are too hard/easy
 
 ## Installation
 Run the following in a terminal. This program is tested with `python 3.9`.
-```bash
+```sh
 pip3 install pyyaml
 git clone EZproblem
 ```
@@ -22,7 +22,7 @@ git clone EZproblem
 Generating testcases with EZproblem is a simple three-step procedure.
 1. Make a folder for the problem
 2. Implement testcase generation functions
-3. Run Crunch.py to handle the rest of the work for you
+3. Run `Crunch.py` to handle the rest of the work for you
 
 ### Step 1 - Folder structure
 A problem to be processed with EZproblem must live in its own folder. Thus, we create a project folder with the following two items:
@@ -46,7 +46,8 @@ solver = "INSERT SOLVER FILENAME HERE"
 subtask_1 = problem.new_subtask(ez.cbr_naming(1, HOW MANY POINTS))
 
 # Define a function that generates testcases for subtask 1, and how many testcases to generate
-# @subtask_1.testcases(How many testcases to generate with this function, name for the subtasks made with this)
+# This function creates a testcase and returns it as a string. It is called once per testcase generated.
+# @subtask_1.testcases(How many testcases to generate with this function, name for the testcases made with this)
 @subtask_1.testcases(HOW MANY, INSERT NAME) 
 def factory(i): 
 	... # Logic to generate
