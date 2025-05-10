@@ -56,6 +56,8 @@ def factory(i):
 ```
 An example `creator.py` file is in `bracketex/creator.py`. It is commented to serve as a tutorial.
 
+PROTIP: Use `help(class / function)` to get documentation on any classes/methods, all the code has lots of docstrings.
+
 ### Step 3 - Generate testcases
 Run `python3 Crunch.py [path to project folder]`. The testcases generated will be put in `project folder/testcases/`, in the form `[number].in` and `[number].out`.
 
