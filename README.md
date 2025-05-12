@@ -141,5 +141,6 @@ All testcases generated! They are in bracketex/testcases/
 To run the `bracketex` example, you have to first compile its `solver.cpp` to a binary named `solver` in the folder.
 
 ## TODO
-1. Implement subtasks inheriting testcases of another subtask (subset)
-2. Implement lazy generation where testcases already generated are skipped. 
+1. Add assert testing feature to ensure testcases are valid
+2. Implement subtasks inheriting testcases of another subtask (subset)
+3. Implement lazy generation where testcases already generated are skipped. 
