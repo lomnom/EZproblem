@@ -96,7 +96,7 @@ def run(exc_path: str, input_str: str) -> tuple:
 	    )
 	    end = perf_counter()
 
-	if proc.returncode != 0:
+	if proc.returncode != 0 or proc.stderr.decode(errors="replace") != "":
 	    raise RuntimeError
 
 	return (proc.stdout.decode(errors="replace"), end - start)
@@ -112,8 +112,10 @@ def generate_solution(solver_path: str, testcase: str) -> tuple:
 	print("Running solver...")
 	try:
 		output, duration = run(solver_path, testcase)
+		if output.strip() == "": # Solver silently crashed
+			raise RuntimeError 
 	except RuntimeError:
-		raise RuntimeError("Solver crashed!")
+		raise RuntimeError("Solver crashed or solution empty (should never happen)!")
 	print(f"Solved in {time_str(duration)}!")
 	return (output, duration)
 
